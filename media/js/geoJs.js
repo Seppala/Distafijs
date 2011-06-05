@@ -67,6 +67,7 @@ jQuery(window).ready(function(){
 		//Saves the current position that has been calculated by initate_geolocation.
 		//Then resets the geolocation to get ready to fetch the ending location of the ball. 
 		//Then saves the current position so that it can be used for calculation with a new position.
+		/*
 		function saveStartPos(startPos) {
 			//saves current position
 			
@@ -90,7 +91,7 @@ jQuery(window).ready(function(){
 			stopWatch();
 			document.getElementById("status").innerHTML= 'Saved location for where the shot was taken from';
 			
-		}
+		}*/
 		
 		//the endpoint variable is used to store the ending location of a shot or another place compared to where the shot was
 		//hit from
