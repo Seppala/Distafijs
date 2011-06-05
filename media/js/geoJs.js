@@ -6,8 +6,17 @@ jQuery(window).ready(function(){
 			
 			//Click on start 
 			
-			//When one of the club links is clicked the geolocation is started
+			//When one of the club links is clicked the geolocation is started. Also, the current club is saved as global variable
+			//clubId. Why I do it like this now? I'm an amateur.
 			jQuery(".club").click(initiate_geolocation);
+			
+			var clubId;
+			
+			jQuery(".club").click(function() {
+				clubId = $(this).attr("id");
+				localStorage.setItem("currentClub", clubId);
+				document.getElementById("club").innerHTML= clubId;
+			});
 			
 			//jQuery("#setStart").click(saveStartPos(startPos));
 			
@@ -18,15 +27,9 @@ jQuery(window).ready(function(){
 			//When "save" is clicked the shot metrics (geopositions, club and distance) are saved.
 			jQuery("#saveShot").click(saveShot);
 			
-			//When "save" is clicked the shot metrics (geopositions, club and distance) are saved.
 			
-			var clubId;
-			jQuery(".club").click(function() {
-				clubId = $(this).attr("id");
-				localStorage.setItem("currentClub", clubId);
-				document.getElementById("club").innerHTML= clubId;
 				
-			});
+			
 		});
 		
 		// How it works:
