@@ -1,0 +1,45 @@
+<html manifest="media/shotsmanifest">
+<head>
+	<meta name="viewport" content="user-scalable=no, width=device-width" />
+	<!-- <link rel="stylesheet" href="/site_media/style.css" type="text/css" /> -->
+	<link type="text/css" rel="stylesheet" media="screen" href="/site_media/theme.css">
+	<!-- <link type="text/css" rel="stylesheet" media="screen" href="/site_media/appletheme.css">-->
+	<script type="text/javascript" src="/site_media/js/jquery-1.4.js"></script>
+	<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.2.min.js"></script>-->
+	<script type="text/javascript" src="/site_media/js/baseJs.js"></script>
+	<script type="text/javascript" src="/site_media/js/geoJs.js"></script>
+	<script type="text/javasript" src="/site_media/js/jqtouch.js"></script>
+	<script type="text/javascript">
+	    var jQT = $.jQTouch({
+	        icon: 'apple-touch-icon.png',
+	        statusBar: 'black'
+	    });
+	</script>
+	
+	
+</head>
+<body>
+<div id="home">
+	<div class="toolbar">
+	<h1>Distafi</h1>
+</div>
+<ul class="edgetoedge">
+	<li><a href="help.html">Helpy</a></li>
+	<li><a href="about">About</a></li>
+</ul>
+</div>
+		
+<div id="content">
+	{% block app %}
+	{% endblock %}
+</div>
+<div id="footer">
+<ul>
+	<li><a href="about/">About</a></li>
+	<li><a href="donate.html">Donate</a></li>
+</ul>
+<p class= "subtle">What you don't measure you don't control. What you don't control you can't improve. Meet your distance.</p>
+<p class="subtle">Riku Seppälä, 2011</p>
+</div>
+</body>
+</html>

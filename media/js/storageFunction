@@ -1,0 +1,175 @@
+$(document).ready(function() {
+	if (typeof(localStorage) == 'undefined' ) {
+		alert('Your browser does not support HTML5 localStorage. Try upgrading.');
+	} 
+	else {
+		getOfflineShots();
+		
+		//This function will make it possible to store the shot data when a button is pressed.
+		
+		$("#logForm").submit(function(){
+			var date_now = new Date();
+			startingPoint = new startingPoint();				
+			endingPoint = new endingPoint();
+			dist = new Integer();
+			
+			
+			dist = models.IntegerField()
+			club = models.CharField(max_length=30)
+			player = models.ForeignKey(User, related_name="player")
+			date = models.DateTimeField(auto_now_add=True, null = True)
+	
+			var values = new Array();
+			var project = $("input[name='project']").val();
+			var hours = $("input[name='hours']").val();
+			var date = $("input[name='date']").val();
+
+			//strip html tags.
+			project = project.replace(/(<([^>]+)>)/ig, "");
+
+			//encode special characters.
+			// name = name.replace(/&/,"&amp;");
+			// name = name.replace(/</,"&lt;");
+			// name = name.replace(/>/,"&gt;");
+	
+			values.push(project);
+			values.push(hours);
+			values.push(date);
+
+			if (project == "" || project == "Project Name" || hours == "" || hours == "Hours" || date == "" || date == "Date") {	
+				$("#emptyFields-message").dialog({
+					resizable: false,
+					height:140,
+					modal: true,
+					show: 'fold',
+					buttons: {
+						Ok: function() {
+							$(this).dialog('close');
+						}
+					}
+				});
+			} else {
+				try {
+					localStorage.setItem(itemId, values.join(';'));
+				} catch (e) {
+					if (e == QUOTA_EXCEEDED_ERR) {
+						alert('Quota exceeded!');
+					}
+				}
+
+			  	getOfflineShots();
+			}
+		});
+		
+		$("#clearLog").click(function() {
+			$("#clearLog-message").dialog({
+				resizable: false,
+				height:140,
+				modal: true,
+				show: 'fold',
+				buttons: {
+					'Delete all items': function() {
+						localStorage.clear();
+						getOfflineShots();
+						$(this).dialog('close');
+					},
+					Cancel: function() {
+						$(this).dialog('close');
+					}
+				}
+			});
+		});
+		
+		$("#aboutButton").click(function() {
+			$("#about").slideDown("slow");
+		});
+		
+		$("#closeButton").click(function() {
+			$("#about").slideUp("slow");
+		});
+	}
+});
+
+/**
+ * getOfflineShots
+ *
+ * Retrieves all list items from localStorage
+ * and displays as list items.
+ */
+function getOfflineShots() {
+   	var timeLog = "";
+   	var i = 0;
+	var logLength = localStorage.length-1;
+	var totalHours = 0.0;	
+	
+    //process each item and create a list item
+    for (i = 0; i <= logLength; i++) {
+		var itemKey = localStorage.key(i);
+		var values = localStorage.getItem(itemKey);
+		values = values.split(";");
+		var project = values[0];
+		var hours = values[1];
+		var date = values[2];
+	
+		timeLog += '<li><strong>' + project + '</strong>: ' + hours + ' hours <span class="delete">&times;<span class="hidden" title="Delete Time" id="' + itemKey + '">Are you sure you want to delete ' + project + ' from the log?</span></span> <span class="date">' + date + '</span></li>';
+		
+		totalHours = totalHours + parseInt(hours);
+   	}
+
+   	if (timeLog == "")
+   		timeLog = '<li class="empty">Log Currently Empty</li>';
+
+	//display the total number of hours
+	$("section header p span").html(totalHours);
+
+	//update the log with all items
+	$("#theLog").html(timeLog);
+
+	//remove bottom border of last li
+	$("ul li:last-child").css("border", 0);
+	
+	deleteItem(); //bind the dialogs to each item in the updated list.
+}
+
+/**
+ * deleteItem
+ *
+ * Displays the dialog to delete a single item
+ * and deletes it if successfull.
+ */
+function deleteItem() {
+	var deleteItemDialog = new Array();
+	$(".delete").each(function() {
+		var id = $(this).find("span").attr("id");
+		deleteItemDialog[id] = $("#"+id).dialog({
+			autoOpen: false,
+			resizable: false,
+			height: 140,
+			modal: true,
+			show: 'fold',
+			buttons: {
+				'Delete Time': function() {
+					localStorage.removeItem(id);
+					getOfflineShots();
+					$(this).dialog("close");
+				},
+				Cancel: function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+
+		$(this).click(function(){
+			deleteItemDialog[id].dialog("open");
+			return false;
+		});
+	});
+}
+
+$(function() {
+	$('#date').datepicker({
+		showButtonPanel: true,
+		showAnim: 'fold',
+		dateFormat: 'm/dd/yy'
+	});
+});

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block app %}
+
+<h2>Distafi</h2>
+<p id="demo">Meet your distance.</p>
+
+<div id="status">
+</div>
+<table class="numbtable clubs">
+	<tr>
+		<th colspan="4">Woods</th>
+	</tr>
+	<tr>
+		<td colspan="2"><a href="#" class="club" id="driver">Driver</a></td>
+		<td colspan="2"><a href="#" class="club" id="rescue">Rescue</a></td>
+	</tr>
+	<tr>
+		<td><a href="#" class="club" id="3 wood">3</a></td>
+		<td><a href="#" class="club" id="5 wood">5</a></td>
+		<td><a href="#" class="club" id="7 wood">7</a></td><td><a href="#" class="club" id="9 wood">9</a></td>
+	</tr>
+
+	<tr>
+		<th colspan="4">Irons</th>
+	</tr>
+	<tr>
+		<td><a href="#" class="club" id="3 iron">3</a></td><td><a href="#" class="club" id="4 iron">4</a></td><td><a href="#" class="club" id="5 iron">5</a></td><td><a href="#" class="club" id="6 iron">6</a></td>
+	</tr>
+	<tr>
+		<td><a href="#" class="club" id="7 iron">7</a></td><td><a href="#" class="club" id="8 iron">8</a></td><td><a href="#" class="club" id="9 iron">9</a></td><td><a href="#" class="club" id="PW">PW</a></td>
+	</tr>	
+	<tr>
+		<td><a href="#" class="club" id="SW">SW</a></td><td><a href="#" class="club" id="GW">GW</a></td><td><a href="#" class="club" id="LW">LW</a></td><td><a href="#" class="club" id="xW">xW</a></td>
+	</tr>
+</table>
+<div id="numbers">
+	<table class="numbTable" >
+		<tr><td>Club</td><td id="club">Choose your club</td></tr>
+		<tr><td>Accuracy</td><td id="accuracy">GPS accuracy</td></tr>
+		<tr><td>Latitude</td><td id="latitude">Choose your location</td></tr>
+		<tr><td>Longitude</td><td id="longitude">Choose your location</td></tr>
+		<tr><td>Distance</td><td id="distance">Calculated shot distance</td></tr>
+	</table>
+
+</div>
+<div id="buts">
+	<ul class="rounded">
+			<li><a href="#" id="setStart" onclick="saveStartPos(startPos)">Confirm hit shot location</a></li>
+			<li id="calc"><a href="#" id="calculate">Calculate Distance</a></li>
+			<li><a href="#" id="setEnd" onclick="saveEnd()">Confirm shot end location</a></li>
+			<li><a href="#" id="reset" onclick="stopWatch()">Reset shot point</a></li>
+			<li id="calcSave"><a href="#" id="saveShot">Save Shot to your Records</a></li>
+			
+	</ul>
+</div>				
+<div id="finishDiv">
+	<table>
+		<tr>
+			<td id="calc"><a href="#" id="calculate">Calculate</a></td>
+			<td id="calcSave"><a href="#" id="saveShot">Save</a></td>
+			<td>Cancel</td>
+		</tr>
+</div>
+<tr><td>Latitude</td><td id="latitude1">&nbsp;</td></tr>
+<tr><td>Longitude</td><td id="longitude1">&nbsp;</td></tr>
+
+
+<form>
+     <input type="button" onclick="stopWatch();"  
+                             value="Stop Watch"/>
+   </form>
+
+{% endblock %}
