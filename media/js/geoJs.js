@@ -13,6 +13,7 @@ jQuery(window).ready(function(){
 			var clubId;
 			
 			jQuery(".club").click(function() {
+				document.getElementById("where").innerHTML= "In clubId thing";
 				clubId = $(this).attr("id");
 				localStorage.setItem("currentClub", clubId);
 				document.getElementById("club").innerHTML= clubId;
@@ -40,6 +41,7 @@ jQuery(window).ready(function(){
 		
 		//initiates a geolocation and sends it to calculateSpot that calculates and gives location to user
         function initiate_geolocation() {
+			document.getElementById("where").innerHTML= "In initiate geolocation";
             var startpoint = navigator.geolocation.watchPosition(calculateSpot, handle_errors, {enableHighAccuracy:true} );
 			document.getElementById("status").innerHTML= 'acquiring geolocation for startposition';
         }
@@ -51,6 +53,7 @@ jQuery(window).ready(function(){
 		
 		function calculateSpot(position)
 		{
+			document.getElementById("where").innerHTML= "In calculatespot";
 			var pointAccur = position.coords.accuracy;
 			
 			//Calculate the position
@@ -67,7 +70,7 @@ jQuery(window).ready(function(){
 		//Saves the current position that has been calculated by initate_geolocation.
 		//Then resets the geolocation to get ready to fetch the ending location of the ball. 
 		//Then saves the current position so that it can be used for calculation with a new position.
-		/*
+		
 		function saveStartPos(startPos) {
 			//saves current position
 			
@@ -91,7 +94,7 @@ jQuery(window).ready(function(){
 			stopWatch();
 			document.getElementById("status").innerHTML= 'Saved location for where the shot was taken from';
 			
-		}*/
+		}
 		
 		//the endpoint variable is used to store the ending location of a shot or another place compared to where the shot was
 		//hit from
