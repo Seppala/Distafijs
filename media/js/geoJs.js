@@ -113,6 +113,7 @@ jQuery(window).ready(function(){
 			var R = 6371; // km
 			var lat1 = position1.coords.latitude;
 			var lon1 = position1.coords.longitude;
+			document.getElementById("where").innerHTML= 'It did go into calculate_distanceH';
 			
 			//fetches the position that has been saved
 			try {
@@ -121,7 +122,7 @@ jQuery(window).ready(function(){
 				savedPost = jQuery.parseJSON( savedPost );
 			} catch (e) {
 				
-				//alert('Couldnt fetch the location where the ball was hit from? Did you remember to set it? Sorry about that.');
+				alert('Couldnt fetch the location where the ball was hit from? Did you remember to set it? Sorry about that.');
 				return;
 			}
 			try {
@@ -257,8 +258,10 @@ jQuery(window).ready(function(){
 		
 		
 		//torad function turns degrees into radians
+		
 		if (typeof(Number.prototype.toRad) === "undefined") {
 		  Number.prototype.toRad = function() {
 		    return this * Math.PI / 180;
-		  }
-		}
+		  		}
+			}
+		
