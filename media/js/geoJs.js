@@ -38,7 +38,7 @@ jQuery(window).ready(function(){
 		// 2. Calculate the and show the coordinates to the user (calculateSpot)
 		// 3. When the coordinates are accurate enough, the user saves the location saveStartLoc (save)
 		// 4. At ball, acquire new coordinates ()
-		
+		var startpoint
 		//initiates a geolocation and sends it to calculateSpot that calculates and gives location to user
         function initiate_geolocation() {
 			document.getElementById("where").innerHTML= "In initiate geolocation";
