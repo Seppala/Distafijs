@@ -98,7 +98,7 @@ jQuery(window).ready(function(){
 		
 		//the endpoint variable is used to store the ending location of a shot or another place compared to where the shot was
 		//hit from
-		var endpoint
+		var endpoint;
 		
 		function initiate_secondgeo() {
 			var endpoint = navigator.geolocation.watchPosition(calculate_distanceH, handle_errors, {enableHighAccuracy:true} );
