@@ -101,7 +101,7 @@ jQuery(window).ready(function(){
 		var endpoint
 		
 		function initiate_secondgeo() {
-			endpoint = navigator.geolocation.watchPosition(calculate_distanceH, handle_errors, {enableHighAccuracy:true} );
+			var endpoint = navigator.geolocation.watchPosition(calculate_distanceH, handle_errors, {enableHighAccuracy:true} );
 			document.getElementById("status").innerHTML= 'Acquiring geolocation for endposition';
 		}
 		
