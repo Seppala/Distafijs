@@ -8,11 +8,11 @@ jQuery(window).ready(function(){
 			
 			//When one of the club links is clicked the geolocation is started. Also, the current club is saved as global variable
 			//clubId. Why I do it like this now? I'm an amateur.
-			jQuery(".club").click(initiate_geolocation);
+			$(".club").click(initiate_geolocation);
 			
 			var clubId;
 			
-			jQuery(".club").click(function() {
+			$(".club").click(function() {
 				document.getElementById("where").innerHTML= "In clubId thing";
 				clubId = $(this).attr("id");
 				localStorage.setItem("currentClub", clubId);
@@ -23,10 +23,10 @@ jQuery(window).ready(function(){
 			
 			//When calculate is clicked the geoposition for the second place(where the ball landed) 
 			//is calculated and the distance also calculated and shown to the user
-			jQuery("#calculate").click(initiate_secondgeo);
+			$("#calculate").click(initiate_secondgeo);
 			
 			//When "save" is clicked the shot metrics (geopositions, club and distance) are saved.
-			jQuery("#saveShot").click(saveShot);
+			$("#saveShot").click(saveShot);
 			
 			
 				
@@ -42,8 +42,9 @@ jQuery(window).ready(function(){
 		//initiates a geolocation and sends it to calculateSpot that calculates and gives location to user
         function initiate_geolocation() {
 			document.getElementById("where").innerHTML= "In initiate geolocation";
-            var startpoint = navigator.geolocation.watchPosition(calculateSpot, handle_errors, {enableHighAccuracy:true} );
-			document.getElementById("status").innerHTML= 'acquiring geolocation for startposition';
+            startpoint = navigator.geolocation.watchPosition(calculateSpot, handle_errors, {enableHighAccuracy:true} );
+			document.getElementById("status").innerHTML= 'Geolocation found.';
+			document.getElementById("confirmButton").show();
         }
 		
 		
@@ -54,15 +55,14 @@ jQuery(window).ready(function(){
 		function calculateSpot(position)
 		{
 			document.getElementById("where").innerHTML= "In calculatespot";
-			var pointAccur = position.coords.accuracy;
 			
 			//Calculate the position
 			startPos = position;
 			//show the user the position
-			document.getElementById("accuracy").innerHTML= pointAccur;
+			document.getElementById("accuracy").innerHTML= startPos.coords.accuracy;
 			document.getElementById("longitude").innerHTML= startPos.coords.longitude;
 			document.getElementById("latitude").innerHTML= startPos.coords.latitude;
-			document.getElementById("status").innerHTML= 'Calculating position and accuracy for the shot';
+			document.getElementById("status").innerHTML= 'Fetching location';
 			
 			
 		}
